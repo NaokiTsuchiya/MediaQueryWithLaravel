@@ -14,8 +14,11 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $response = $this->get('/api/media');
 
         $response->assertStatus(200);
+        $response->assertJson(
+            ['id' => 1, 'name' => 'test']
+        );
     }
 }
