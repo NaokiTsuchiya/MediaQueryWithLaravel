@@ -29,13 +29,9 @@ final class RayDiServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->bind(
+        $this->app->instance(
             User::class,
-            static function ($app) {
-                $injector = $app->make(InjectorInterface::class);
-                assert($injector instanceof InjectorInterface);
-                return $injector->getInstance(User::class);
-            }
+            $this->app->call(InjectorProxy::class, ['classString' => User::class])
         );
     }
 }
